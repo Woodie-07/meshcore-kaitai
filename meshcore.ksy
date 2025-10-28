@@ -149,9 +149,18 @@ types:
     seq:
       - id: data
         size-eos: true
+  transport_codes:
+    seq:
+      - id: val1
+        type: u2
+      - id: val2
+        type: u2
 seq:
   - id: header
     type: header
+  - id: transport_codes
+    type: transport_codes
+    if: header.route_type == route_type::transport_flood or header.route_type == route_type::transport_direct
   - id: path
     type: path
   - id: payload
