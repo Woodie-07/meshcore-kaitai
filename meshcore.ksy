@@ -60,13 +60,13 @@ types:
         type: u4
   advert_appdata_header:
     seq:
-      - id: has_location
-        type: b1
-      - id: has_feat1
+      - id: has_name
         type: b1
       - id: has_feat2
         type: b1
-      - id: has_name
+      - id: has_feat1
+        type: b1
+      - id: has_location
         type: b1
       - id: node_type
         type: b4
