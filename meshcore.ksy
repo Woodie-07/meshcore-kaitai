@@ -107,6 +107,15 @@ types:
       - id: appdata
         if: not _io.eof
         type: advert_appdata
+  advert_sign_data:
+    seq:
+      - id: public_key
+        size: 32
+      - id: timestamp
+        type: u4
+      - id: appdata
+        if: not _io.eof
+        type: advert_appdata
   grp_data:
     seq:
       - id: channel_hash
