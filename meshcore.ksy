@@ -1,6 +1,7 @@
 meta:
   id: meshcore
   endian: le
+  bit-endian: le
 enums:
   route_type:
     0x0: transport_flood
@@ -21,6 +22,7 @@ enums:
     0xA: multipart
     0xF: raw_custom
   node_type:
+    0x0: none
     0x1: chat
     0x2: repeater
     0x3: room_server
@@ -28,14 +30,14 @@ enums:
 types:
   header:
     seq:
-      - id: payload_version
-        type: b2
-      - id: payload_type
-        type: b4
-        enum: payload_type
       - id: route_type
         type: b2
         enum: route_type
+      - id: payload_type
+        type: b4
+        enum: payload_type
+      - id: payload_version
+        type: b2
   path:
     seq:
       - id: num_nodes
@@ -60,17 +62,17 @@ types:
         type: u4
   advert_appdata_header:
     seq:
-      - id: has_name
-        type: b1
-      - id: has_feat2
-        type: b1
-      - id: has_feat1
-        type: b1
-      - id: has_location
-        type: b1
       - id: node_type
         type: b4
         enum: node_type
+      - id: has_location
+        type: b1
+      - id: has_feat1
+        type: b1
+      - id: has_feat2
+        type: b1
+      - id: has_name
+        type: b1
   advert_appdata:
     seq:
       - id: header
