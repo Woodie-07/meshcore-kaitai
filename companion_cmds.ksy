@@ -136,7 +136,7 @@ types:
       - id: out_path
         type: u1
         repeat: expr
-        repeat-expr: num_out_path
+        repeat-expr: 64
       - id: name
         type: str
         size: 32
@@ -266,10 +266,28 @@ types:
     seq:
       - id: pin
         type: u4
+  set_other_params_telemetry:
+    seq:
+      - id: telemetry_mode_base
+        type: b2
+      - id: telemetry_mode_loc
+        type: b2
+      - id: telemetry_mode_env
+        type: b2
   set_other_params:
     seq:
-      - id: manual_add_contats
+      - id: manual_add_contacts
         type: u1
+      - id: telemetry
+        type: set_other_params_telemetry
+        if: not _io.eof
+      - id: multi_acks
+        type: u1
+        if: not _io.eof
+      - id: advert_loc_policy
+        type: u1
+        enum: companion_common::advert_loc_policy
+        if: not _io.eof
   send_telemetry_req:
     seq:
       - id: unused

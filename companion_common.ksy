@@ -6,6 +6,9 @@ enums:
     0: plain
     1: cli_data
     2: signed_plain
+  advert_loc_policy:
+    0: none
+    1: share
 types:
   contact_flags:
     seq:

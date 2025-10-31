@@ -59,6 +59,49 @@ types:
       - id: err_code
         type: u1
         enum: err_code
+  contacts_start:
+    seq:
+      - id: num_contacts
+        type: u4
+  contact:
+    seq:
+      - id: pub_key
+        size: 32
+      - id: node_type
+        type: u1
+        enum: meshcore::node_type
+      - id: flags
+        type: companion_common::contact_flags
+      - id: num_out_path
+        type: u1
+      - id: out_path
+        type: u1
+        repeat: expr
+        repeat-expr: 64
+      - id: name
+        type: str
+        size: 32
+        encoding: UTF-8
+        terminator: 0
+      - id: last_advert_timestamp
+        type: u4
+      - id: latitude_microdegrees
+        type: u4
+      - id: longitude_microdegrees
+        type: u4
+      - id: lastmod
+        type: u4
+    instances:
+      has_out_path:
+        value: num_out_path != 0xFF
+      latitude:
+        value: latitude_microdegrees / 1000000.0
+      longitude:
+        value: longitude_microdegrees / 1000000.0
+  end_of_contacts:
+    seq:
+      - id: lastmod
+        type: u4
   self_info:
     seq:
       - id: advert_type
@@ -77,6 +120,7 @@ types:
         type: u1
       - id: advert_loc_policy
         type: u1
+        enum: companion_common::advert_loc_policy
       - id: telemetry_mode_base
         type: b2
       - id: telemetry_mode_loc
@@ -201,6 +245,17 @@ types:
     instances:
       snr:
         value: snr_raw / 4.0
+  channel_info:
+    seq:
+      - id: index
+        type: u1
+      - id: name
+        type: str
+        size: 32
+        encoding: UTF-8
+        terminator: 0
+      - id: secret
+        size: 16
   pub_key_payload:
     seq:
       - id: pub_key
@@ -310,7 +365,7 @@ types:
       - id: out_path
         type: u1
         repeat: expr
-        repeat-expr: num_out_path
+        repeat-expr: 64
       - id: name
         type: str
         size: 32
@@ -318,17 +373,17 @@ types:
         terminator: 0
       - id: last_advert_timestamp
         type: u4
-      - id: gps_lat_microdegrees
+      - id: latitude_microdegrees
         type: u4
-      - id: gps_lon_microdegrees
+      - id: longitude_microdegrees
         type: u4
       - id: lastmod
         type: u4
     instances:
-      gps_lat:
-        value: gps_lat_microdegrees / 1000000.0
-      gps_lon:
-        value: gps_lon_microdegrees / 1000000.0
+      latitude:
+        value: latitude_microdegrees / 1000000.0
+      longitude:
+        value: longitude_microdegrees / 1000000.0
   telemetry_response:
     seq:
       - id: reserved
@@ -380,12 +435,16 @@ seq:
       switch-on: resp_code
       cases:
         resp_code::err: err
+        resp_code::contacts_start: contacts_start
+        resp_code::contact: contact
+        resp_code::end_of_contacts: end_of_contacts
         resp_code::self_info: self_info
         resp_code::contact_msg_recv: contact_msg_recv
         resp_code::channel_msg_recv: channel_msg_recv
         resp_code::device_info: device_info
         resp_code::contact_msg_recv_v3: contact_msg_recv_v3
         resp_code::channel_msg_recv_v3: channel_msg_recv_v3
+        resp_code::channel_info: channel_info
   - id: push_payload
     if: is_push
     type:
