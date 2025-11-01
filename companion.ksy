@@ -79,9 +79,7 @@ types:
         repeat: expr
         repeat-expr: 64
       - id: name
-        type: str
         size: 32
-        encoding: UTF-8
         terminator: 0
       - id: last_advert_timestamp
         type: u4
@@ -191,6 +189,10 @@ types:
     instances:
       is_flood:
         value: path_len != 0xFF
+  curr_time:
+    seq:
+      - id: secs
+        type: u4
   device_info:
     seq:
       - id: firmware_ver_code
@@ -219,6 +221,10 @@ types:
     instances:
       max_contacts:
         value: max_contacts_raw * 2
+  private_key:
+    seq:
+      - id: private_key
+        size: 64
   channel_msg_recv_v3:
     seq:
       - id: snr_raw
@@ -367,9 +373,7 @@ types:
         repeat: expr
         repeat-expr: 64
       - id: name
-        type: str
         size: 32
-        encoding: UTF-8
         terminator: 0
       - id: last_advert_timestamp
         type: u4
@@ -441,7 +445,9 @@ seq:
         resp_code::self_info: self_info
         resp_code::contact_msg_recv: contact_msg_recv
         resp_code::channel_msg_recv: channel_msg_recv
+        resp_code::curr_time: curr_time
         resp_code::device_info: device_info
+        resp_code::private_key: private_key
         resp_code::contact_msg_recv_v3: contact_msg_recv_v3
         resp_code::channel_msg_recv_v3: channel_msg_recv_v3
         resp_code::channel_info: channel_info

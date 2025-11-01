@@ -90,8 +90,6 @@ types:
         if: header.has_feat2
         type: u2
       - id: name
-        type: str
-        encoding: UTF-8
         size-eos: true
     instances:
       latitude:
