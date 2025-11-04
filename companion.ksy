@@ -108,7 +108,7 @@ types:
         type: u1
       - id: max_tx_power_dbm
         type: u1
-      - id: public_key
+      - id: pub_key
         size: 32
       - id: latitude_microdegrees
         type: u4

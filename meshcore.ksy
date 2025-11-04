@@ -98,7 +98,7 @@ types:
         value: longitude_microdegrees / 1000000.0
   payload_advert:
     seq:
-      - id: public_key
+      - id: pub_key
         size: 32
       - id: timestamp
         type: u4
@@ -109,7 +109,7 @@ types:
         type: advert_appdata
   advert_sign_data:
     seq:
-      - id: public_key
+      - id: pub_key
         size: 32
       - id: timestamp
         type: u4
@@ -128,7 +128,7 @@ types:
     seq:
       - id: dst_hash
         type: u1
-      - id: public_key
+      - id: pub_key
         size: 32
       - id: cipher_mac
         type: u2
