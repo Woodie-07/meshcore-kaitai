@@ -84,9 +84,9 @@ types:
       - id: last_advert_timestamp
         type: u4
       - id: latitude_microdegrees
-        type: u4
+        type: s4
       - id: longitude_microdegrees
-        type: u4
+        type: s4
       - id: lastmod
         type: u4
     instances:
@@ -111,9 +111,9 @@ types:
       - id: pub_key
         size: 32
       - id: latitude_microdegrees
-        type: u4
+        type: s4
       - id: longitude_microdegrees
-        type: u4
+        type: s4
       - id: multi_acks
         type: u1
       - id: advert_loc_policy
@@ -378,9 +378,9 @@ types:
       - id: last_advert_timestamp
         type: u4
       - id: latitude_microdegrees
-        type: u4
+        type: s4
       - id: longitude_microdegrees
-        type: u4
+        type: s4
       - id: lastmod
         type: u4
     instances:
